@@ -13,5 +13,5 @@ UCLASS()
 class FNTASTICTESTTASK_API AFntasticTestTaskGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+    
 };
