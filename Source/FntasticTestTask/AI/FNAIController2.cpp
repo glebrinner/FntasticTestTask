@@ -3,3 +3,7 @@
 
 #include "FNAIController2.h"
 
+void AFNAIController2::MovingToTarget()
+{
+	MoveTo(OutActors[5]);
+}

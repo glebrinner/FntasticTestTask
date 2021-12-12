@@ -12,9 +12,9 @@ AFNControllPAwn::AFNControllPAwn()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	static ConstructorHelpers::FClassFinder<ACharacter> Char(TEXT("Blueprint'/Game/SpawnedCharacter'"));
-	static ConstructorHelpers::FClassFinder<ACharacter> Char1(TEXT("Blueprint'/Game/SpawnedCharacter1'"));
-	static ConstructorHelpers::FClassFinder<ACharacter> Char2(TEXT("Blueprint'/Game/SpawnedCharacter2'"));
+	static ConstructorHelpers::FClassFinder<ACharacter> Char(TEXT("Blueprint'/Game/Turtles/SpawnedCharacter'"));
+	static ConstructorHelpers::FClassFinder<ACharacter> Char1(TEXT("Blueprint'/Game/Turtles/SpawnedCharacter1'"));
+	static ConstructorHelpers::FClassFinder<ACharacter> Char2(TEXT("Blueprint'/Game/Turtles/SpawnedCharacter2'"));
 	SpawnCharacters.Add(Char.Class);
 	SpawnCharacters.Add(Char1.Class);
 	SpawnCharacters.Add(Char2.Class);
@@ -24,6 +24,7 @@ AFNControllPAwn::AFNControllPAwn()
 	
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	CameraComponent->SetupAttachment(CapsuleComponent);
+	
 
 }
 

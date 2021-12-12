@@ -4,7 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "NiagaraSystem.h"
 #include "Engine/TargetPoint.h"
+#include "Sound/SoundCue.h"
+#include "Components/AudioComponent.h"
 #include "FNAIController.generated.h"
 
 /**
@@ -14,13 +17,23 @@ UCLASS()
 class FNTASTICTESTTASK_API AFNAIController : public AAIController
 {
 	GENERATED_BODY()
-    
+
+	UPROPERTY(EditAnywhere)
+	USoundCue* SoundCue;
+
+	UPROPERTY()
+	UAudioComponent* AudioComponent;
+
+	FPathFollowingRequestResult* RequestResult;
 
 public:
 	AFNAIController();
 
 	UPROPERTY()
 	TArray<AActor*> OutActors;
+
+	UPROPERTY(EditAnywhere)
+	UNiagaraSystem* NiagaraTemplate;
 	
 	FTimerHandle TimerHandle;
 
@@ -28,7 +41,9 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 
 protected:
-
 	virtual void FindTargets();
+	virtual void MovingToTarget();
+	virtual void SpawnStartUpEffect();
+	virtual void SpawnFinishEffects();
 	
 };

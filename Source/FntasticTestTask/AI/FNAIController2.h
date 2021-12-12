@@ -13,5 +13,8 @@ UCLASS()
 class FNTASTICTESTTASK_API AFNAIController2 : public AFNAIController
 {
 	GENERATED_BODY()
+
+protected:
+	virtual void MovingToTarget() override;
 	
 };

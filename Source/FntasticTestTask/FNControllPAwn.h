@@ -21,8 +21,6 @@ class FNTASTICTESTTASK_API AFNControllPAwn : public APawn
 	
 	UPROPERTY(EditAnywhere)
 	UCameraComponent* CameraComponent;
-	
-
 
 
 public:
