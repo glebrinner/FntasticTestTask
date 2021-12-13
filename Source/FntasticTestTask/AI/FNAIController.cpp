@@ -2,20 +2,16 @@
 
 
 #include "FNAIController.h"
-
-#include "NiagaraFunctionLibrary.h"
 #include "Engine/TargetPoint.h"
 #include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
 
 AFNAIController::AFNAIController()
 {
-	// static ConstructorHelpers::FClassFinder<UNiagaraEmitter> NiagaraEffect(TEXT("Blueprint'/Game/SpawnedCharacter'"));
-	static ConstructorHelpers::FObjectFinder<USoundCue> FinishSound(TEXT("/Game/Sounds/FinishSound/FinishCue"));
-	SoundCue = FinishSound.Object;
+	static ConstructorHelpers::FObjectFinder<USoundCue> StartSound(TEXT("/Game/Sounds/NotifSound/SCue"));
+	SoundCue = StartSound.Object;
 	
-	AudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("PropellerAudioComp"));
-//    AudioComponent->SetRelativeLocation(GetOwner()->GetActorLocation());
+	AudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("AudioComp"));
     AudioComponent->bAutoActivate = false;
 }
 
@@ -23,7 +19,8 @@ void AFNAIController::BeginPlay()
 {
     Super::BeginPlay();
 	FindTargets();
-    SpawnFinishEffects();
+    PlaySpawnSound();
+
 }
 
 
@@ -41,35 +38,14 @@ void AFNAIController::FindTargets()
 void AFNAIController::MovingToTarget()
 {
 	TSubclassOf<UNavigationQueryFilter> Filter;
-	
-	//RequestResult->MoveId = 1;
-    //MoveTo(OutActors[3]);
-	MoveToActor(OutActors[3], 100,true, true, true, Filter,true);
-//	if(!RequestResult->Code)
-//	{
-//		SpawnFinishEffects();
-//		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "Request Working");
-//	}
+	MoveToActor(OutActors[3], 50,true, true, true, Filter,true);
 }
 
-void AFNAIController::SpawnStartUpEffect()
+void AFNAIController::PlaySpawnSound()
 {
-	if(NiagaraTemplate)
-	{
-		UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), NiagaraTemplate,
-		GetOwner()->GetActorLocation(), GetOwner()->GetActorRotation(),
-		FVector(1,1, 1),true,true);
-	}
-
-}
-
-void AFNAIController::SpawnFinishEffects()
-{
-	
 	if (SoundCue->IsValidLowLevelFast()) {
 		AudioComponent->SetSound(SoundCue);
 	}
  
 	AudioComponent->Play();
-	
 }

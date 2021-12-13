@@ -25,15 +25,12 @@ class FNTASTICTESTTASK_API AFNAIController : public AAIController
 	UAudioComponent* AudioComponent;
 
 	FPathFollowingRequestResult* RequestResult;
-
+	
 public:
 	AFNAIController();
 
-	UPROPERTY()
-	TArray<AActor*> OutActors;
-
 	UPROPERTY(EditAnywhere)
-	UNiagaraSystem* NiagaraTemplate;
+	TArray<AActor*> OutActors;
 	
 	FTimerHandle TimerHandle;
 
@@ -41,9 +38,10 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 
 protected:
-	virtual void FindTargets();
+
+	UFUNCTION(BlueprintCallable)
+	void FindTargets();
 	virtual void MovingToTarget();
-	virtual void SpawnStartUpEffect();
-	virtual void SpawnFinishEffects();
+	void PlaySpawnSound();
 	
 };

@@ -21,5 +21,6 @@ class FNTASTICTESTTASK_API AFNAIController1 : public AFNAIController
 	virtual void Tick(float DeltaSeconds) override;
 
 protected:
+	UFUNCTION(BlueprintCallable)
 	virtual void MovingToTarget() override;
 };
